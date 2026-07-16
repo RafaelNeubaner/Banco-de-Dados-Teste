@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+    <title>Cadastro</title>
+  </head>
+  <body>
+    <div class="group">
+      <section class="login">
+        <h2>Login</h2>
+        <form id="formLogin" action="login">
+          <label for="email">Email:</label>
+          <input type="email" id="lemail" name="email" required />
+
+          <label for="senha">Senha:</label>
+          <input type="password" id="lsenha" name="senha" required />
+
+          <button type="submit">Entrar</button>
+        </form>
+      </section>
+
+      <section class="cadastro">
+        <h2>Cadastro</h2>
+        <form id="formCadastro" action="submit">
+          <label for="nome">Nome:</label>
+          <input type="text" id="nome" name="nome" required />
+
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required />
+
+          <label for="senha">Senha:</label>
+          <input type="password" id="senha" name="senha" required />
+
+          <button type="submit">Cadastrar</button>
+        </form>
+      </section>
+    </div>
+    <div id="logged" class="logged hidden">
+      <h2 class="mb60">Bem-vindo!</h2>
+      <div class="loggedDiv mb30">
+        <div class="alterarDados">
+          <h3 class="mb30">Alterar Dados</h3>
+          <form id="formAlterarDados" action="submit">
+            <label for="nome">Nome:</label>
+            <input type="text" id="altnome" name="nome" required />
+
+            <label for="email">Email:</label>
+            <input type="email" id="altemail" name="email" required />
+
+            <label for="senha">Senha:</label>
+            <input type="password" id="altsenha" name="senha" required />
+
+            <button type="submit">Atualizar</button>
+          </form>
+        </div>
+        <div class="verUsuarios">
+          <h3 class="mb30">Lista de Usuários</h3>
+          <table id="listaUsuarios">
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Options</th>
+              </tr>
+            </thead>
+            <tbody id="usuariosContainer">
+              <!-- Lista de usuários será preenchida aqui -->
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="3">
+                  Total de usuários: <span id="totalUsuarios">0</span>
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+      <button type="button" id="botaoSair">Sair</button>
+    </div>
+  </body>
+</html>
