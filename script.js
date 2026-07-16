@@ -164,3 +164,10 @@ async function listUser() {
     });
   }
 }
+
+logoutButton = document.getElementById( "botaoSair" );
+logoutButton.addEventListener( "click", () => {
+  localStorage.removeItem( "usuario" );
+  logged.classList.add( "hidden" );
+  window.location.href = "index.html";
+} );

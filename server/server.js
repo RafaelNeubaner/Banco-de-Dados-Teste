@@ -5,17 +5,17 @@ const { Pool } = require('pg');
 const API = express();
 API.use(
   cors({
-    origin: "*", // Permite que qualquer Front-end acesse a API
+    origin: "*", 
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    // O segredo está aqui: você precisa autorizar o servidor a receber os cabeçalhos abaixo!
     allowedHeaders: [
       "Content-Type",
       "Authorization",
       "ngrok-skip-browser-warning",
     ],
   }),
-); // Permite que o seu HTML acesse esta API
-API.use(express.json()); // Permite entender os dados do formulário
+); 
+
+API.use( express.json() ); 
 
 const pool = new Pool({
   user: 'postgres', 
