@@ -16,7 +16,10 @@ if (document.getElementById("formCadastro")) {
       "https://slush-dude-tackle.ngrok-free.dev/cadastrar",
       {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "ngrok-skip-browser-warning": "true"
+         },
         body: JSON.stringify(dados),
       },
     );
@@ -41,11 +44,17 @@ document
       senha: senha,
     };
 
-    const resposta = await fetch("https://slush-dude-tackle.ngrok-free.dev/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(dados),
-    });
+    const resposta = await fetch(
+      "https://slush-dude-tackle.ngrok-free.dev/login",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "ngrok-skip-browser-warning": "true",
+        },
+        body: JSON.stringify(dados),
+      },
+    );
     const response = await resposta.json();
     if (resposta.ok) {
       localStorage.setItem("usuario", JSON.stringify(response));
@@ -58,6 +67,10 @@ document
       listUser();
       const resposta2 = await fetch(
         `https://slush-dude-tackle.ngrok-free.dev/dados?id=${encodeURIComponent(dadosLogin.usuario.id)}`,
+      {headers: {
+          "Content-Type": "application/json",
+          "ngrok-skip-browser-warning": "true",
+        }}
       );
       if (resposta2.ok) {
         const usuario = await resposta2.json();
@@ -89,9 +102,11 @@ document
     console.log(dados);
     const resposta = await fetch("https://slush-dude-tackle.ngrok-free.dev/alterar", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json",
+          "ngrok-skip-browser-warning": "true" },
       body: JSON.stringify(dados),
-    });
+    } );
+    
     const response = await resposta.json();
     if (resposta.ok) {
       alert( `${response.mensagem}` );
@@ -105,7 +120,12 @@ async function listUser() {
   const tabela = document.getElementById("usuariosContainer");
   const totalUsuarios = document.getElementById("totalUsuarios");
   let contador = 0;
-  const response = await fetch("https://slush-dude-tackle.ngrok-free.dev/usuarios");
+  const response = await fetch( "https://slush-dude-tackle.ngrok-free.dev/usuarios"
+    ,{headers: {
+          "Content-Type": "application/json",
+          "ngrok-skip-browser-warning": "true",
+        }}
+  );
   if (!response.ok) {
     alert("Erro ao buscar a lista de usuários.");
     return;
@@ -129,6 +149,10 @@ async function listUser() {
     botao.addEventListener("click", async () => {
       const id = botao.getAttribute("data-id");
       const resposta = await fetch(`https://slush-dude-tackle.ngrok-free.dev/usuarios/${id}`, {
+        headers: {
+          "Content-Type": "application/json",
+          "ngrok-skip-browser-warning": "true",
+        },
         method: "DELETE",
       });
       if (resposta.ok) {
