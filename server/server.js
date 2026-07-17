@@ -30,7 +30,8 @@ API.post('/cadastrar', async (req, res) => {
   try {
     const query = 'INSERT INTO usuarios (nome, email, senha) VALUES ($1, $2, $3)';
     await pool.query(query, [nome, email, senha]);
-    res.status(201).json({ mensagem: 'Cadastro realizado com sucesso!' });
+    res.status( 201 ).json( {
+      mensagem: 'Cadastro realizado com sucesso!\nFaça login para continuar.' });
   } catch (erro) {
     console.error( erro );
     if (erro.code === '23505') {

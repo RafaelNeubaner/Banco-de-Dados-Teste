@@ -201,12 +201,12 @@ toggleSenhaElements.forEach((toggle) => {
     const senhaInput = toggle.previousElementSibling;
     if (senhaInput.type === "password") {
       senhaInput.type = "text";
-      toggle.classList.remove("bi-eye");
-      toggle.classList.add("bi-eye-slash");
+      toggle.classList.add("bi-eye");
+      toggle.classList.remove("bi-eye-slash");
     } else {
       senhaInput.type = "password";
-      toggle.classList.remove("bi-eye-slash");
-      toggle.classList.add("bi-eye");
+      toggle.classList.add("bi-eye-slash");
+      toggle.classList.remove("bi-eye");
     }
   });
 });
