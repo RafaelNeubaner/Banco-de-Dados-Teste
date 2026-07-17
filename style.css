@@ -119,7 +119,7 @@ button {
   transition: all 0.7s ease;
 }
 
-button:hover > not.excluir {
+button:hover > :not(.excluir .editar) {
   transform: translateY(-3px);
   background: linear-gradient(90deg, var(--accent-2), var(--accent));
 }
@@ -154,7 +154,7 @@ button:active {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 20px;
+  gap: 100px;
 }
 
 .mb15 {
@@ -169,10 +169,29 @@ button:active {
   margin-bottom: 60px;
 }
 
+.tabelaUsuarios {
+  height: 300px; 
+  width: 100%;
+  overflow-y: auto;
+}
+
 #listaUsuarios {
-  border: #017488 1px solid;
   border-radius: 10px;
   padding: 10px;
+  width: 100%;
+}
+
+.senhaContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.toggleSenha {
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+  color: var(--muted);
 }
 
 th,
@@ -197,4 +216,129 @@ td {
 
 .excluir:hover {
   background: linear-gradient(90deg, #f87171, #ef4444);
+}
+
+.editar {
+  background-color: #facc15;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  background: linear-gradient(90deg, #facc15, #fbbf24);
+}
+
+.editar:hover {
+  background: linear-gradient(90deg, #fbbf24, #facc15);
+}
+
+/* Tablets e telas menores */
+@media (max-width: 992px) {
+  body {
+    align-items: flex-start;
+    padding: 32px 20px;
+  }
+
+  .group {
+    width: min(680px, 100%);
+    gap: 20px;
+  }
+
+  .group > section {
+    flex-basis: 100%;
+  }
+
+  .login {
+    border-right: 0;
+    border-bottom: 1px dashed var(--border);
+  }
+
+  .logged {
+    position: absolute;
+    min-height: 100vh;
+    height: auto;
+    padding: 40px 24px;
+    justify-content: flex-start;
+  }
+
+  .loggedDiv {
+    width: min(680px, 100%);
+    flex-direction: column;
+    align-items: stretch;
+    gap: 40px;
+  }
+
+  .alterarDados,
+  .verUsuarios {
+    width: 100%;
+  }
+
+  .tabelaUsuarios {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  #listaUsuarios {
+    min-width: 560px;
+  }
+}
+
+/* Celulares */
+@media (max-width: 576px) {
+  body {
+    padding: 16px 12px;
+  }
+
+  .group {
+    width: 100%;
+    padding: 16px;
+    gap: 16px;
+  }
+
+  .group > section {
+    min-width: 0;
+    padding: 18px;
+  }
+
+  .group h2 {
+    font-size: 18px;
+  }
+
+  input,
+  button {
+    font-size: 16px;
+  }
+
+  .logged {
+    padding: 28px 16px;
+  }
+
+  .logged > h2 {
+    margin-bottom: 32px;
+  }
+
+  .loggedDiv {
+    gap: 28px;
+  }
+
+  .loggedDiv h3 {
+    margin-bottom: 18px;
+  }
+
+  .tabelaUsuarios {
+    height: 260px;
+  }
+
+  th,
+  td {
+    padding: 8px;
+    font-size: 14px;
+    white-space: nowrap;
+  }
+
+  .excluir,
+  .editar {
+    padding: 6px 8px;
+    font-size: 13px;
+  }
 }

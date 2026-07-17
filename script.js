@@ -131,13 +131,14 @@ async function listUser() {
     return;
   }
   const userList = await response.json();
+  userList.sort((a, b) => a.nome.localeCompare(b.nome));
   tabela.innerHTML = "";
   for (const user of userList) {
     const linha = document.createElement("tr");
     linha.innerHTML = `
       <td>${user.nome}</td>
       <td>${user.email}</td>
-      <td><button class="excluir" data-id="${user.id}">Excluir</button></td>
+      <td><button class="editar" data-id="${user.id}">Editar</button> <button class="excluir" data-id="${user.id}">Excluir</button></td> 
     `;
     tabela.appendChild(linha);
     contador++;
@@ -163,6 +164,28 @@ async function listUser() {
       }
     });
   }
+  const botoesEditar = document.querySelectorAll(".editar");
+  for (const botao of botoesEditar) {
+    botao.addEventListener("click", async () => {
+      const id = botao.getAttribute("data-id");
+      const resposta = await fetch(`https://slush-dude-tackle.ngrok-free.dev/dados?id=${encodeURIComponent(id)}`, {
+        headers: {
+          "Content-Type": "application/json",
+          "ngrok-skip-browser-warning": "true",
+        },
+      });
+      if (resposta.ok) {
+        const usuario = await resposta.json();
+        altnome.value = usuario.nome;
+        altemail.value = usuario.email;
+        altsenha.value = usuario.senha;
+        localStorage.setItem("usuario", JSON.stringify({ usuario }));
+        console.log(usuario);
+      } else {
+        alert("Erro ao buscar os dados do usuário.");
+      }
+    });
+  }
 }
 
 logoutButton = document.getElementById( "botaoSair" );
@@ -171,3 +194,19 @@ logoutButton.addEventListener( "click", () => {
   logged.classList.add( "hidden" );
   window.location.href = "index.html";
 } );
+
+const toggleSenhaElements = document.querySelectorAll(".toggleSenha");
+toggleSenhaElements.forEach((toggle) => {
+  toggle.addEventListener("click", () => {
+    const senhaInput = toggle.previousElementSibling;
+    if (senhaInput.type === "password") {
+      senhaInput.type = "text";
+      toggle.classList.remove("bi-eye");
+      toggle.classList.add("bi-eye-slash");
+    } else {
+      senhaInput.type = "password";
+      toggle.classList.remove("bi-eye-slash");
+      toggle.classList.add("bi-eye");
+    }
+  });
+});

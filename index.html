@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="style.css" />
     <script src="script.js" defer></script>
     <title>Cadastro</title>
@@ -15,8 +16,12 @@
           <label for="email">Email:</label>
           <input type="email" id="lemail" name="email" required />
 
-          <label for="senha">Senha:</label>
-          <input type="password" id="lsenha" name="senha" required />
+          <label for="senha">Senha:</label> 
+          <div class="senhaContainer">
+            <input type="password" id="lsenha" name="senha" required />
+          <i class="bi bi-eye toggleSenha"></i>
+          </div>
+          
 
           <button type="submit">Entrar</button>
         </form>
@@ -32,7 +37,10 @@
           <input type="email" id="email" name="email" required />
 
           <label for="senha">Senha:</label>
-          <input type="password" id="senha" name="senha" required />
+          <div class="senhaContainer">
+            <input type="password" id="senha" name="senha" required />
+            <i class="bi bi-eye toggleSenha"></i>
+          </div>
 
           <button type="submit">Cadastrar</button>
         </form>
@@ -51,13 +59,17 @@
             <input type="email" id="altemail" name="email" required />
 
             <label for="senha">Senha:</label>
-            <input type="password" id="altsenha" name="senha" required />
+            <div class="senhaContainer">
+              <input type="password" id="altsenha" name="senha" required />
+              <i class="bi bi-eye toggleSenha"></i>
+            </div>
 
             <button type="submit">Atualizar</button>
           </form>
         </div>
         <div class="verUsuarios">
           <h3 class="mb30">Lista de Usuários</h3>
+          <div class="tabelaUsuarios">
           <table id="listaUsuarios">
             <thead>
               <tr>
@@ -77,6 +89,7 @@
               </tr>
             </tfoot>
           </table>
+          </div>
         </div>
       </div>
       <button type="button" id="botaoSair">Sair</button>
