@@ -66,7 +66,7 @@ document
       altsenha = document.getElementById("altsenha");
       listUser();
       const resposta2 = await fetch(
-        `https://slush-dude-tackle.ngrok-free.dev/dados?id=${encodeURIComponent(dadosLogin.usuario.id)}`,
+        `https://slush-dude-tackle.ngrok-free.dev/usuarios/${ encodeURIComponent( dadosLogin.usuario.id ) }`,
       {headers: {
           "Content-Type": "application/json",
           "ngrok-skip-browser-warning": "true",
@@ -92,16 +92,16 @@ document
     evento.preventDefault();
     const nome = document.getElementById("altnome").value;
     const email = document.getElementById("altemail").value;
-    const senha = document.getElementById("altsenha").value;
+    const senha = document.getElementById( "altsenha" ).value;
+    const id = JSON.parse(localStorage.getItem("usuario")).usuario.id;
     const dados = {
       nome: nome,
       email: email,
       senha: senha,
-      id: JSON.parse(localStorage.getItem("usuario")).usuario.id,
     };
     console.log(dados);
-    const resposta = await fetch("https://slush-dude-tackle.ngrok-free.dev/alterar", {
-      method: "POST",
+    const resposta = await fetch(`https://slush-dude-tackle.ngrok-free.dev/usuarios/${id}`, {
+      method: "PUT",
       headers: { "Content-Type": "application/json",
           "ngrok-skip-browser-warning": "true" },
       body: JSON.stringify(dados),
@@ -168,7 +168,7 @@ async function listUser() {
   for (const botao of botoesEditar) {
     botao.addEventListener("click", async () => {
       const id = botao.getAttribute("data-id");
-      const resposta = await fetch(`https://slush-dude-tackle.ngrok-free.dev/dados?id=${encodeURIComponent(id)}`, {
+      const resposta = await fetch(`https://slush-dude-tackle.ngrok-free.dev/usuarios/${id}`, {
         headers: {
           "Content-Type": "application/json",
           "ngrok-skip-browser-warning": "true",

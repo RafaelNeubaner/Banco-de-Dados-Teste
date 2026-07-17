@@ -60,20 +60,25 @@ API.post('/login', async (req, res) => {
   }
 });
 
-API.get('/dados', (req, res) => {
-  const id = req.query.id;
-  pool.query('SELECT * FROM usuarios WHERE id = $1', [id], (erro, resultado) => {
-    if (erro) {
-      console.error(erro);
-      res.status(500).json({ erro: 'Erro no servidor.' });
-    } else {
+API.get('/usuarios/:id', async (req, res) => {
+  const id = req.params.id;
+  try {
+    const resultado = await pool.query('SELECT * FROM usuarios WHERE id = $1', [id]);
+    if (resultado.rows.length > 0) {
       res.status(200).json(resultado.rows[0]);
+    } else {
+      res.status(404).json({ erro: 'Usuário não encontrado.' });
     }
+  } catch (erro) {
+    console.error(erro);
+    res.status(500).json({ erro: 'Erro no servidor.' });
+  }
   });
-});
 
-API.post('/alterar', async (req, res) => {
-  const { nome, email, senha, id } = req.body;
+
+API.put('/usuarios/:id', async (req, res) => {
+  const { nome, email, senha } = req.body;
+  const id = req.params.id;
   try {
     const query = 'UPDATE usuarios SET nome = $1, senha = $2, email = $3 WHERE id = $4';
     await pool.query(query, [nome, senha, email, id]);
